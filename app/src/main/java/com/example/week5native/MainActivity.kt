@@ -1,5 +1,6 @@
 package com.example.week5native
 
+import android.R.attr.apiKey
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.week5native.BuildConfig.OPENWEATHER_API_KEY
 import com.example.week5native.ui.WeatherScreen
 import com.example.week5native.ui.theme.Week5NativeTheme
 
@@ -34,7 +36,8 @@ class MainActivity : ComponentActivity() {
                     onToggleTheme = {
                         isDarkTheme = !isDarkTheme
                     },
-                    )
+                    apiKey = OPENWEATHER_API_KEY
+                )
                 }
             }
         }
