@@ -17,7 +17,6 @@ class WeatherViewModel(private val api: WeatherApi = RetrofitInstance.api) : Vie
     private val _uiState = MutableStateFlow(WeatherUiState())
     val uiState: StateFlow<WeatherUiState> = _uiState
 
-    // Kaupungin nimi StateFlowksi jotta Compose reagoi muutoksiin
     private val _city = MutableStateFlow("")
     val city: StateFlow<String> = _city
 
@@ -27,28 +26,30 @@ class WeatherViewModel(private val api: WeatherApi = RetrofitInstance.api) : Vie
 
     // Noudetaan Sää OpenWeatherin API-avaimen avulla kaupunkikohtaisesti
     fun fetchWeather(apiKey: String) {
-        if (city.value.isBlank()) return
+        if (_city.value.isBlank()) return
 
         _uiState.value = _uiState.value.copy(isLoading = true, error = null)
 
-        //
+        // runCatching estää sovellusta kaatumasta jos haku kusee tai kaupunkia ei ole tietokannassa
         viewModelScope.launch {
-            try {
-                val response: WeatherResponse = api.getWeather(_city.value, apiKey)
+            runCatching {
+                api.getWeather(_city.value, apiKey)
+            }.onSuccess { response ->
                 _uiState.value = WeatherUiState(
                     temperature = response.main.temp,
                     cityName = response.name,
                     description = response.weather.firstOrNull()?.description ?: "",
                     isLoading = false
                 )
-            } catch (e: Exception) {
+            }.onFailure { e ->
                 _uiState.value = WeatherUiState(
                     isLoading = false,
-                    error = "Error: ${e.message}"
+                    error = "Failed to fetch weather: ${e.message}"
                 )
             }
         }
     }
 }
+
 
 

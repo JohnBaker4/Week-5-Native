@@ -41,12 +41,11 @@ fun WeatherScreen(
             // Tiedot haetusta kaupungista tulee tällä näkyviin
             if (uiState.isLoading) {
                 Text("Loading...")
-                CircularProgressIndicator()
             } else if (uiState.error != null) {
-                Text("Error: ${uiState.error}")
+                Text(uiState.error!!)
             } else {
                 Text("City: ${uiState.cityName}")
-                Text("Temp: ${uiState.temperature}°C")
+                Text("Temperature: ${uiState.temperature}°C")
                 Text("Description: ${uiState.description}")
             }
 
@@ -54,7 +53,8 @@ fun WeatherScreen(
             OutlinedTextField(
                 value = city,
                 onValueChange = { viewModel.updateCity(it) },
-                label = { Text("City") }
+                label = { Text("City") },
+                singleLine = true
             )
 
             // Nappi sään hakemiselle
