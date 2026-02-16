@@ -26,9 +26,9 @@ Voit kytkeä tumman teeman päälle/pois näytön alalaidasta.
 
 API-avain on tallennettu local.properties -tiedostoon ja siirretty BuildConfig-kentäksi tähän tyyliin:
 
-# OPENWEATHER_API_KEY="tähän_oma_api_key"
+OPENWEATHER_API_KEY="tähän_oma_api_key"
 
 # BuildConfig (app/build.gradle)
-# buildConfigField("String", "OPENWEATHER_API_KEY", "\"${property("OPENWEATHER_API_KEY")}\"")
+buildConfigField("String", "OPENWEATHER_API_KEY", "\"${property("OPENWEATHER_API_KEY")}\"")
 
 Retrofit käyttää tätä avainta API-kutsussa ilman että paljastaa API-avainta ja local.properties varmistaa ettei se eksy Githubiin.
