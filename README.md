@@ -1,4 +1,4 @@
-## Week 5 Native
+# Week 5 Native
 
 Demo-videon linkki: https://unioulu-my.sharepoint.com/:v:/g/personal/jlievone24_students_oamk_fi/IQAA3EUBIHUDR41oBVCBWROOAS6J9DJrE5bdqgHbBLpGtgU?e=lr5nyB&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D
 
@@ -28,7 +28,7 @@ API-avain on tallennettu local.properties -tiedostoon ja siirretty BuildConfig-k
 
 OPENWEATHER_API_KEY="tähän_oma_api_key"
 
-# BuildConfig (app/build.gradle)
+### BuildConfig (app/build.gradle)
 buildConfigField("String", "OPENWEATHER_API_KEY", "\"${property("OPENWEATHER_API_KEY")}\"")
 
 Retrofit käyttää tätä avainta API-kutsussa ilman että paljastaa API-avainta ja local.properties varmistaa ettei se eksy Githubiin.
